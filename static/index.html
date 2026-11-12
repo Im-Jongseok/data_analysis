@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iris 품종 예측</title>
+</head>
+<body>
+  <main>
+    <h1>Iris 품종 예측</h1>
+    <form id="iris-form">
+      <p><label>꽃받침 길이 (cm) <input name="sepal_length" type="number" step="any" value="6.0" required></label></p>
+      <p><label>꽃받침 너비 (cm) <input name="sepal_width" type="number" step="any" value="2.9" required></label></p>
+      <p><label>꽃잎 길이 (cm) <input name="petal_length" type="number" step="any" value="4.5" required></label></p>
+      <p><label>꽃잎 너비 (cm) <input name="petal_width" type="number" step="any" value="1.5" required></label></p>
+      <button type="submit">품종 예측</button>
+    </form>
+    <p><output id="result" aria-live="polite"></output></p>
+    <a href="/api/docs">Swagger UI</a>
+  </main>
+  <script>
+    const form = document.querySelector("#iris-form");
+    const result = document.querySelector("#result");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const values = new FormData(form);
+      const input = {
+        sepal_length: Number(values.get("sepal_length")),
+        sepal_width: Number(values.get("sepal_width")),
+        petal_length: Number(values.get("petal_length")),
+        petal_width: Number(values.get("petal_width")),
+      };
+
+      result.textContent = "예측 중…";
+      try {
+        const response = await fetch("/api/iris/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(input),
+        });
+        if (!response.ok) {
+          throw new Error(String(response.status));
+        }
+        const prediction = await response.json();
+        result.textContent = `${prediction.species} · 확률 ${prediction.probability}`;
+      } catch {
+        result.textContent = "예측에 실패했습니다. 입력값과 서버 상태를 확인해 주세요.";
+      }
+    });
+  </script>
+</body>
+</html>
