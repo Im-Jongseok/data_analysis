@@ -25,5 +25,8 @@ semester: "2026-2"
 | 주차 | 자료 | 내용 |
 | --- | --- | --- |
 | 10주차 | [sales.ipynb](./sales.ipynb) · [원본 데이터](./sales_data.csv) · [정리 데이터](./sales_clean.csv) · [HW5](./HW5/) | 매출 데이터 점검, 전처리와 탐색적 데이터 분석, HW5 제출 준비 |
+| 11주차 | [iris.ipynb](./iris.ipynb) · [app.py](./app.py) · [예측 화면](./static/index.html) | Iris 분류 모델 학습과 예측 API |
+| 12주차 | [wine.ipynb](./wine.ipynb) · [app_wine.py](./app_wine.py) | Wine 데이터 분류와 예측 API |
+| 13주차 | [ml3.ipynb](./ml3.ipynb) · [colab_iris.ipynb](./colab_iris.ipynb) · [ml4.ipynb](./ml4.ipynb) · [call_wine.py](./call_wine.py) · [CO2 데이터](./co2_monthly.csv) | 실습 ①~⑧, 총액 회귀·CO2 예측·Wine PCA |
 
 ※ 커밋 규칙은 [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) 참고
